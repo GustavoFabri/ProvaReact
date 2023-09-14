@@ -25,7 +25,130 @@ export default function Home() {
     const [totalBebida,setTotalBebida] = useState('0');
 
 
+    function CalculoComida(){
 
+        var homenNumber = Number(qtHomen)
+        var MulherNumber = Number(qtMulher)
+        var CriancaNumber = Number(qtCrianca)
+
+        var homen = 0
+        var mulher = 0
+        var crianca = 0
+
+        var totalCrianca = 0
+        var totalHomen = 0
+        var totalMulher = 0
+
+        var total = 0
+
+        var totalPessoas = 0
+
+        var totalM = 0
+
+        var totalCarne = 0
+
+        homen = homenNumber * 400 
+        mulher = MulherNumber * 300 
+        crianca = CriancaNumber * 200 
+
+        totalCrianca = crianca * 0.10
+        totalHomen = homen * 0.10
+        totalMulher = mulher * 0.10
+
+
+        total = homen + mulher + crianca
+
+
+        totalM = totalCrianca + totalHomen + totalMulher
+
+        totalPessoas = homenNumber + MulherNumber + CriancaNumber
+
+
+        totalCarne = totalM + total
+
+        setQntPessoas(totalPessoas.toString())
+
+        setPesoCarne(total.toString())
+
+        setMargemC(totalM.toString())
+
+        setTotalComida(totalCarne.toString())
+
+
+        CalcAperitivo()
+
+    }
+
+    function CalcAperitivo(){
+
+        var totalCarne = Number(totalComida)
+        var homenNumber = Number(qtHomen)
+        var MulherNumber = Number(qtMulher)
+        var CriancaNumber = Number(qtCrianca)
+
+        var homen = 0
+        var mulher = 0
+        var crianca = 0
+
+        var totalCrianca = 0
+        var totalHomen = 0
+        var totalMulher = 0
+
+        var total = 0
+
+        var totalM = 0
+
+        var geral = 0
+
+        var totalA = 0
+
+
+        homen = homenNumber * 150 
+        mulher = MulherNumber * 100 
+        crianca = CriancaNumber * 50 
+
+        totalCrianca = crianca * 0.10
+        totalHomen = homen * 0.10
+        totalMulher = mulher * 0.10
+
+
+        total = homen + mulher + crianca
+
+
+        totalM = totalCrianca + totalHomen + totalMulher
+
+        totalA = total + totalM
+
+        geral = totalCarne + totalA
+
+        setPesoAperitivo(total.toString())
+
+        setMargemA(totalM.toString())
+
+        setTotalComida(geral.toString())
+
+    }
+
+    function zerar(){
+        
+        setTotalBebida('0')
+        setMargemR('0')
+        setLRefri('0')
+        setMargemAg('0')
+        setLAgua('0')
+        setMargemCer('0')
+        setLCerveja('0')
+        setTotalComida('0')
+        setMargemA('0')
+        setPesoAperitivo('0')
+        setMargemC('0')
+        setPesoCarne('0')
+        setQntPessoas('0')
+        setQtCrianca('0')
+        setQtMulher('0')
+        setQtHomen('0')   
+
+    }
 
     return (
     
@@ -38,7 +161,7 @@ export default function Home() {
             </View>
 
             <View style={styles.inHM}>
-                <View style={styles.inHomen}>
+                <View>
 
                     <Text style={styles.txt}>Homens</Text>
 
@@ -52,7 +175,7 @@ export default function Home() {
 
                 </View>
 
-                <View style={styles.inMulher}>
+                <View>
 
                     <Text style={styles.txt}>Mulheres</Text>
 
@@ -88,6 +211,8 @@ export default function Home() {
 
                 <TouchableOpacity
                     style={styles.bttC}
+                    onPress={CalculoComida}
+                    
                 >
                     <Text style={styles.txtB}>Calcular</Text>
                 </TouchableOpacity>
@@ -149,58 +274,75 @@ export default function Home() {
             </View>
 
             <View style={styles.calBebida}>
-                <Text>
-                    Comida
-                </Text>
-                <View>
+                <Text style={styles.txtBebida}>
+                    Bebida
+                </Text >
+                <View style={styles.vwBebida}>
 
-                    <View>
-                        <Text>
-                            {LCerveja}g
+                    <View style={styles.vwCerveja}>
+                        <Text style={styles.txtQnt}>
+                            {LCerveja}L
                         </Text>
-                        <Text>
+                        <Text style={styles.txtmedida}>
                             Cerveja
                         </Text>
-                        <Text>
-                            {margemCer}g
+                        <Text style={styles.media}>
+                            {margemCer}ml
                         </Text>
                     </View>
 
-                    <View>
-                        <Text>
-                            {LAgua}g
+                    <View style={styles.vwAgua}>
+                        <Text style={styles.txtQnt}>
+                            {LAgua}L
                         </Text>
-                        <Text>
+                        <Text style={styles.txtmedida}>
                             Agua
                         </Text>
-                        <Text>
-                            {margemAg}g
+                        <Text style={styles.media}>
+                            {margemAg}ml
                         </Text>
                     </View>
-                        <Text>
-                            {LRefri}g
+
+                    <View style={styles.vwRefri}>
+                        <Text style={styles.txtQnt}>
+                            {LRefri}L
                         </Text>
-                        <Text>
+                        <Text style={styles.txtmedida}>
                             Refrigerante
                         </Text>
-                        <Text>
-                            {margemR}g
+                        <Text style={styles.media}>
+                            {margemR}ml
                         </Text>
                     </View>
                     
                 </View>
 
-                <View>
-                    <Text>
-                        {totalBebida}g
-                    </Text>
-                    <Text>
-                        TOTAL
-                    </Text>
+                <View style={styles.vwTotal}>
+
+                    <View style={styles.vwvwTotal}>
+                        <Text style={styles.txtotal}>
+                            {totalBebida} Litros
+                        </Text>
+                        <Text style={styles.txtString}>
+                            TOTAL
+                        </Text>
+
+                    </View>
+                    
+                </View>
+
+                <View style={styles.vwBotao}>
+                    <TouchableOpacity
+                        style={styles.botao}
+                        onPress={zerar}
+                    >
+                        <Text style={styles.txtBotao}>Limpar</Text>
+                    </TouchableOpacity>
+
                 </View>
 
             </View>
            
-        
+        </View>
     )
 }
